@@ -6,11 +6,19 @@ class FavoritesController < ApplicationController
     @blog = Blog.find(params[:blog_id])
     favorite = current_user.favorites.create(blog_id: @blog.id)
     favorite.save
+    respond_to do |format|
+      format.html
+      format.js
+    end
   end
 
   def destroy
     @blog = Blog.find(params[:blog_id])
     current_user.favorites.find_by(id: params[:id]).destroy
+    respond_to do |format|
+      format.html
+      format.js
+    end
   end
 
   private
